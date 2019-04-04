@@ -1,5 +1,6 @@
 package com.tao.movie.service.controller;
 
+import com.tao.movie.service.feign.UserFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +18,12 @@ import org.springframework.web.client.RestTemplate;
 public class MovieController {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private UserFeignClient userFeignClient;
 
     @GetMapping("/user/{id}")
     public String findById(@PathVariable Long id) {
 
-        // 这里用到了RestTemplate的占位符能力
-        String forObject = this.restTemplate.getForObject("http://user-service/user/{id}", String.class, id);
+        String forObject = this.userFeignClient.findById(id);
         // ...电影微服务的业务...
         return forObject;
     }

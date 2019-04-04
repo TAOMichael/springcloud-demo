@@ -30,6 +30,6 @@ user-service:
 ribbon:
   # ribbon 懒加载
   eager-load:
-      enabled: true
-      # 多个用,分隔
-      clients: user-service
+    enabled: true
+    # 多个用,分隔
+    clients: user-service
