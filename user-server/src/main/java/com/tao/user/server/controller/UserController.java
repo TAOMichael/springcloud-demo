@@ -1,6 +1,7 @@
 package com.tao.user.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.tao.user.server.service.impl.UserServiceImpl;
  */
 @RequestMapping("/user")
 @RestController
+@RefreshScope
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
@@ -26,4 +28,5 @@ public class UserController {
 
         return this.userService.findById(id);
     }
+
 }
