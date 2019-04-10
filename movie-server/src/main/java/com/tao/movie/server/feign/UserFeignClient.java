@@ -18,6 +18,9 @@ public interface UserFeignClient {
     @GetMapping("/user/{id}")
     String findById(@PathVariable("id") Long id);
 
+    @GetMapping("/user/testConfig")
+    String testConfig();
+
 }
 
 @Component
@@ -29,6 +32,12 @@ class UserFeignClientFallbackFactory implements FallbackFactory<UserFeignClient>
             public String findById(Long id) {
                 StaticLog.error(throwable, "findById降级处理");
                 return "findByIdFallback";
+            }
+
+            @Override
+            public String testConfig() {
+                StaticLog.error(throwable, "testConfig降级处理");
+                return "testConfig";
             }
         };
     }

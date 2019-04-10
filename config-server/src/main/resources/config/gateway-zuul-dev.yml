@@ -6,7 +6,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka1:8761/eureka/,http://eureka2:8762/eureka/
+      defaultZone: http://eureka1:8761/eureka/
 
 management:
   endpoints:
@@ -16,6 +16,3 @@ management:
   endpoint:
     health:
       show-details: always
-logging:
-  level:
-    com.netflix: DEBUG

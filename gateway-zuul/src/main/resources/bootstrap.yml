@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gateway-zuul    # 对应config server所获取的配置文件的{application}
+  cloud:
+    config:
+#      uri: http://localhost:8005/  用下面方式从注册中心获取配置中心服务最好
+      discovery:
+        enabled: true            # 默认false，设为true表示使用注册中心中的configserver配置而不自己配置configserver的uri
+        serviceId: config-server # 指定config server在服务发现中的serviceId，默认为：configserver
+      profile: dev            # profile对应config server所获取的配置文件中的{profile}
+#  rabbitmq:      动态刷新
+#      host: localhost
+#      port: 5672
+#      username: guest
+#      password: guest
+eureka:
+  client:
+    service-url:
+      # 指定eureka server通信地址，注意/eureka/小尾巴不能少
+      defaultZone: http://eureka1:8761/eureka/
+  instance:
+    # 是否注册IP到eureka server，如不指定或设为false，那就会注册主机名到eureka server
+    prefer-ip-address: true
