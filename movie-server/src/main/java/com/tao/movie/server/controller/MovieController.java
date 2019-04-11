@@ -43,7 +43,7 @@ public class MovieController {
 
         String returnString = forObject + "----" + movieTestConfig;
 
-        StaticLog.info(returnString);
+        StaticLog.info("电影服务测试配置{}", returnString);
 
         return returnString;
     }

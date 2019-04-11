@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("/testConfig")
     public String testConfig() {
 
-        StaticLog.info(userTestConfig);
+        StaticLog.info("用户服务测试配置{}", userTestConfig);
 
         return userTestConfig;
 

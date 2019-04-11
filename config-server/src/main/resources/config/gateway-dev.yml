@@ -1,0 +1,48 @@
+server:
+  port: 8005
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:8761/eureka/
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        # 是否可以通过其他服务的serviceId来转发到具体的服务实例。默认为false
+        locator:
+          enabled: true # 为true,自动创建路由,路由访问方式：http://Gateway_HOST:Gateway_PORT/大写的serviceId/**，其中微服务应用名默认大写访问
+#          lowerCaseServiceId: true #路由小写
+      default-filters:
+        - Elapsed=true
+        - Authorization=true
+      routes:
+        - id: user-server #固定，不同 id 对应不同的功能
+          uri: lb://user-server  #uri以lb://开头（lb代表从注册中心获取服务）
+          order: 0
+          predicates:
+            - Path=/user-server/**
+          filters:
+            - StripPrefix=1
+
+        - id: movie-server
+          uri: lb://movie-server
+          order: 1
+          predicates:
+            - Path=/movie-server/**
+          filters:
+            - StripPrefix=1
+
+        - id: baidu
+          uri: https://www.baidu.com
+          order: 2
+          predicates:
+            - Path=/baidu/**
+          filters:
+            - StripPrefix=1
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: debug
